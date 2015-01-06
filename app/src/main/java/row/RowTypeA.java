@@ -27,14 +27,14 @@ public class RowTypeA {
         return holder;
     }
 
-    public static void onBindDataViewHolder(RecyclerView.ViewHolder holder,final int position, final Model model, final ModelDeleteListener listener) {
+    public static void onBindDataViewHolder(final RecyclerView.ViewHolder holder,final int position, final Model model, final ModelDeleteListener listener) {
         Holder viewHolder = (Holder) holder;
         viewHolder.index.setText(String.valueOf(model.getIndex()));
         viewHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onDelete(position,model);
+                    listener.onDelete(holder.getPosition());
                 }
             }
         });

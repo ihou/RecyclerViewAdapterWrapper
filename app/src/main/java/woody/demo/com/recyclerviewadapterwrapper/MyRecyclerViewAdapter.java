@@ -1,14 +1,15 @@
 package woody.demo.com.recyclerviewadapterwrapper;//package woody.demo.com.recyclerviewadapterwrapper;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import java.util.List;
 
+import adapter_wrapper.RecyclerAdapterWrapper;
 import row.RowFooter;
 import row.RowHeader;
 import row.RowTypeA;
-import adapter_wrapper.RecyclerAdapterWrapper;
 
 /**
  * Created by houwenchang on 2014/12/11.
@@ -74,10 +75,13 @@ public class MyRecyclerViewAdapter extends RecyclerAdapterWrapper {
             case Model.TYPE_A:
                 RowTypeA.onBindDataViewHolder(holder, position, modelList.get(position), new ModelDeleteListener() {
                     @Override
-                    public void onDelete(int position, Model model) {
+                    public void onDelete(int pos) {
+
+
+                        Log.e("","pos:"+pos);
 //                        try {
-                            modelList.remove(position);
-                            notifyItemRemoved(holder.getPosition());//由于已经删除，要重新获取position
+                            modelList.remove(pos-1);
+                            notifyItemRemoved(pos);
 //                        } catch (IndexOutOfBoundsException e) {
 //                            e.printStackTrace();
 //                        }
