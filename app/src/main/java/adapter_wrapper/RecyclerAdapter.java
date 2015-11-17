@@ -9,26 +9,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
 
     private final static int TYPE_HEADER = 100;
     private final static int TYPE_FOOTER = 101;
-    private boolean hasHeader = true;
-    private boolean hasFooter = true;
+    private boolean hasHeader;
+    private boolean hasFooter;
     private View headerView;
     private View footerView;
 
-    private RecyclerView.ViewHolder createHeaderViewHolder(ViewGroup parent, int viewType) {
+    private RecyclerView.ViewHolder createHeaderViewHolder() {
         return new RecyclerView.ViewHolder(headerView) {
         };
     }
 
-    private RecyclerView.ViewHolder createFooterViewHolder(ViewGroup parent, int viewType) {
+    private RecyclerView.ViewHolder createFooterViewHolder() {
         return new RecyclerView.ViewHolder(footerView) {
         };
     }
-
-//    protected void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
-//    }
-//
-//    protected void onBindFooterViewHolder(RecyclerView.ViewHolder holder, int position) {
-//    }
 
     private IAdapterProxy adapterProxy;
 
@@ -45,9 +39,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_HEADER) {
-            return createHeaderViewHolder(parent, viewType);
+            return createHeaderViewHolder();
         } else if (viewType == TYPE_FOOTER) {
-            return createFooterViewHolder(parent, viewType);
+            return createFooterViewHolder();
         } else {
             return adapterProxy.onCreateViewHolder(parent, viewType);
         }
@@ -57,23 +51,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (hasHeader && hasFooter) {
-            if (position == 0) {
-//                onBindHeaderViewHolder(holder, position);
-            } else if (position == getItemCount()) {
-//                onBindFooterViewHolder(holder, position);
-            } else {
+            if (position != 0 && position != getItemCount()) {
                 adapterProxy.onBindViewHolder(holder, position - 1);
             }
         } else if (hasHeader) {
-            if (position == 0) {
-//                onBindHeaderViewHolder(holder, position);
-            } else {
+            if (position != 0) {
                 adapterProxy.onBindViewHolder(holder, position - 1);
             }
         } else if (hasFooter) {
-            if (position == getItemCount() - 1 /*&& holder.getItemViewType() == TYPE_FOOTER*/) {
-//                onBindFooterViewHolder(holder, position);
-            } else {
+            if (position != getItemCount() - 1) {
                 adapterProxy.onBindViewHolder(holder, position);
             }
         } else {
