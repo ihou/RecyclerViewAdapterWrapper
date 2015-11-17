@@ -12,7 +12,10 @@ import woody.demo.com.recyclerviewadapterwrapper.ModelDeleteListener;
 import woody.demo.com.recyclerviewadapterwrapper.R;
 
 /**
- * Created by houwenchang on 2014/12/12.
+ *
+ * @author houwenchang
+ *
+ *  2014/12/12.
  */
 public class RowTypeA {
     public static RecyclerView.ViewHolder onCreateDataViewHolder(ViewGroup viewGroup, int viewType) {
