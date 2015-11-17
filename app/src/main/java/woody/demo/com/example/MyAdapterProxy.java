@@ -1,4 +1,4 @@
-package adapter_wrapper;
+package woody.demo.com.example;
 
 import java.util.List;
 
@@ -7,9 +7,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 
-import row.RowTypeA;
-import woody.demo.com.recyclerviewadapterwrapper.Model;
-import woody.demo.com.recyclerviewadapterwrapper.ModelDeleteListener;
+import adapter_wrapper.IAdapterProxy;
+import woody.demo.com.example.row.RowTypeA;
 
 /**
  * @author houwenchang

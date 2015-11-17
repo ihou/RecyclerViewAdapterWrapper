@@ -1,4 +1,4 @@
-package row;
+package woody.demo.com.example.row;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import woody.demo.com.recyclerviewadapterwrapper.Model;
-import woody.demo.com.recyclerviewadapterwrapper.ModelDeleteListener;
-import woody.demo.com.recyclerviewadapterwrapper.R;
+import woody.demo.com.example.Model;
+import woody.demo.com.example.ModelDeleteListener;
+import woody.demo.com.example.R;
 
 /**
  *

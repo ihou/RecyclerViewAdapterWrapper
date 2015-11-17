@@ -1,4 +1,4 @@
-package woody.demo.com.recyclerviewadapterwrapper;
+package woody.demo.com.example;
 
 /**
  * Created by houwenchang on 2014/12/12.

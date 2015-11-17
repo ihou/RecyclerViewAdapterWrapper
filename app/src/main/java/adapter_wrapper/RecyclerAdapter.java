@@ -2,32 +2,37 @@ package adapter_wrapper;
 
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
-public class RecyclerAdapterWrapper extends RecyclerView.Adapter {
+public class RecyclerAdapter extends RecyclerView.Adapter {
 
     private final static int TYPE_HEADER = 100;
     private final static int TYPE_FOOTER = 101;
     private boolean hasHeader = true;
     private boolean hasFooter = true;
+    private View headerView;
+    private View footerView;
 
-    protected RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
-        return null;
+    private RecyclerView.ViewHolder createHeaderViewHolder(ViewGroup parent, int viewType) {
+        return new RecyclerView.ViewHolder(headerView) {
+        };
     }
 
-    protected RecyclerView.ViewHolder onCreateFooterViewHolder(ViewGroup parent, int viewType) {
-        return null;
+    private RecyclerView.ViewHolder createFooterViewHolder(ViewGroup parent, int viewType) {
+        return new RecyclerView.ViewHolder(footerView) {
+        };
     }
 
-    protected void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
-    }
-
-    protected void onBindFooterViewHolder(RecyclerView.ViewHolder holder, int position) {
-    }
+//    protected void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
+//    }
+//
+//    protected void onBindFooterViewHolder(RecyclerView.ViewHolder holder, int position) {
+//    }
 
     private IAdapterProxy adapterProxy;
 
-    public RecyclerAdapterWrapper(boolean hasHeader, boolean hasFooter) {
+    public RecyclerAdapter(boolean hasHeader, boolean hasFooter) {
         this.hasHeader = hasHeader;
         this.hasFooter = hasFooter;
     }
@@ -40,9 +45,9 @@ public class RecyclerAdapterWrapper extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_HEADER) {
-            return onCreateHeaderViewHolder(parent, viewType);
+            return createHeaderViewHolder(parent, viewType);
         } else if (viewType == TYPE_FOOTER) {
-            return onCreateFooterViewHolder(parent, viewType);
+            return createFooterViewHolder(parent, viewType);
         } else {
             return adapterProxy.onCreateViewHolder(parent, viewType);
         }
@@ -53,21 +58,21 @@ public class RecyclerAdapterWrapper extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (hasHeader && hasFooter) {
             if (position == 0) {
-                onBindHeaderViewHolder(holder, position);
+//                onBindHeaderViewHolder(holder, position);
             } else if (position == getItemCount()) {
-                onBindFooterViewHolder(holder, position);
+//                onBindFooterViewHolder(holder, position);
             } else {
                 adapterProxy.onBindViewHolder(holder, position - 1);
             }
         } else if (hasHeader) {
             if (position == 0) {
-                onBindHeaderViewHolder(holder, position);
+//                onBindHeaderViewHolder(holder, position);
             } else {
                 adapterProxy.onBindViewHolder(holder, position - 1);
             }
         } else if (hasFooter) {
             if (position == getItemCount() - 1 /*&& holder.getItemViewType() == TYPE_FOOTER*/) {
-                onBindFooterViewHolder(holder, position);
+//                onBindFooterViewHolder(holder, position);
             } else {
                 adapterProxy.onBindViewHolder(holder, position);
             }
@@ -143,5 +148,21 @@ public class RecyclerAdapterWrapper extends RecyclerView.Adapter {
 
     public boolean hasFooter() {
         return hasFooter;
+    }
+
+    public View getHeader() {
+        return headerView;
+    }
+
+    public View getFooter() {
+        return footerView;
+    }
+
+    public void setHeader(View headerView) {
+        this.headerView = headerView;
+    }
+
+    public void setFooter(View footerView) {
+        this.footerView = footerView;
     }
 }

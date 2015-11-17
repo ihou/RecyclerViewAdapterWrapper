@@ -1,4 +1,4 @@
-package woody.demo.com.recyclerviewadapterwrapper;//package woody.demo.com.recyclerviewadapterwrapper;
+package woody.demo.com.example;//package woody.demo.com.recyclerviewadapterwrapper;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -56,9 +57,19 @@ public class MainActivity extends Activity {
         for (int i = 0; i < 100; i++) {
             modelList.add(new Model(0, i + 1));
         }
-        mAdapter = new MyRecyclerViewAdapter(modelList);
+
+        final View header = View.inflate(this, R.layout.row_header, null);
+        View footer = View.inflate(this, R.layout.row_footer, null);
+        mAdapter = new MyRecyclerViewAdapter(modelList, header, footer);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+
+        mRecyclerView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((TextView) header.findViewById(R.id.tv)).setText("Header Changed");
+            }
+        }, 3000);
 
 
         findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
