@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class RecyclerAdapter extends RecyclerView.Adapter {
+public class BaseRecyclerAdapter extends RecyclerView.Adapter {
 
     private final static int TYPE_HEADER = 100;
     private final static int TYPE_FOOTER = 101;
@@ -26,9 +26,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
 
     private IAdapterProxy adapterProxy;
 
-    public RecyclerAdapter(boolean hasHeader, boolean hasFooter) {
+    public BaseRecyclerAdapter(boolean hasHeader, boolean hasFooter,View header,View footer) {
         this.hasHeader = hasHeader;
         this.hasFooter = hasFooter;
+        this.headerView = header;
+        this.footerView = footer;
     }
 
 

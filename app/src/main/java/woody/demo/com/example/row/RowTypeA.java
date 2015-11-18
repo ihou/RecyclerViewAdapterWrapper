@@ -25,8 +25,6 @@ public class RowTypeA {
         Holder holder = new Holder(view);
         holder.index = (TextView) view.findViewById(R.id.title);
         holder.delete = (Button) view.findViewById(R.id.delete);
-
-
         return holder;
     }
 

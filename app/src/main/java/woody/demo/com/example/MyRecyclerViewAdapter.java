@@ -5,18 +5,16 @@ import java.util.List;
 import android.view.View;
 
 
-import adapter_wrapper.RecyclerAdapter;
+import adapter_wrapper.BaseRecyclerAdapter;
 
 /**
  * @author houwenchang
  *         <p/>
  *         2014/12/11.
  */
-public class MyRecyclerViewAdapter extends RecyclerAdapter {
+public class MyRecyclerViewAdapter extends BaseRecyclerAdapter {
     public MyRecyclerViewAdapter(List<Model> modelList, View header, View footer) {
-        super(true, true);
+        super(true, true, header, footer);
         setAdapterProxy(new MyAdapterProxy(this, modelList));
-        setHeader(header);
-        setFooter(footer);
     }
 }
