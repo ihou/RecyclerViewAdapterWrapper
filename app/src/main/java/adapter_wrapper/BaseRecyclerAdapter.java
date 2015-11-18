@@ -15,11 +15,17 @@ public class BaseRecyclerAdapter extends RecyclerView.Adapter {
     private View footerView;
 
     private RecyclerView.ViewHolder createHeaderViewHolder() {
+        if (headerView == null) {
+            throw new IllegalStateException("headerView can not be null if you had a header set");
+        }
         return new RecyclerView.ViewHolder(headerView) {
         };
     }
 
     private RecyclerView.ViewHolder createFooterViewHolder() {
+        if (footerView == null) {
+            throw new IllegalStateException("footerView can not be null if you had a footer set");
+        }
         return new RecyclerView.ViewHolder(footerView) {
         };
     }
