@@ -26,7 +26,7 @@ public class BaseRecyclerAdapter extends RecyclerView.Adapter {
 
     private IAdapterProxy adapterProxy;
 
-    public BaseRecyclerAdapter(boolean hasHeader, boolean hasFooter,View header,View footer) {
+    public BaseRecyclerAdapter(boolean hasHeader, boolean hasFooter, View header, View footer) {
         this.hasHeader = hasHeader;
         this.hasFooter = hasFooter;
         this.headerView = header;
@@ -112,23 +112,31 @@ public class BaseRecyclerAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
-        if (holder.getItemViewType() == TYPE_FOOTER) {
-            isFooterShown = true;
+        if (holder.getItemViewType() != TYPE_FOOTER && holder.getItemViewType() != TYPE_HEADER) {
+            adapterProxy.onViewAttachedToWindow(holder);
         }
     }
 
     @Override
     public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
-        if (holder.getItemViewType() == TYPE_FOOTER) {
-            isFooterShown = false;
+        if (holder.getItemViewType() != TYPE_FOOTER && holder.getItemViewType() != TYPE_HEADER) {
+            adapterProxy.onViewDetachedFromWindow(holder);
         }
     }
 
-    private boolean isFooterShown;
-
-    public boolean isFooterShown() {
-        return isFooterShown;
+    @Override
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        if (holder.getItemViewType() != TYPE_FOOTER && holder.getItemViewType() != TYPE_HEADER) {
+            adapterProxy.onViewRecycled(holder);
+        }
     }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+
 
     public boolean hasHeader() {
         return hasHeader;
@@ -144,13 +152,5 @@ public class BaseRecyclerAdapter extends RecyclerView.Adapter {
 
     public View getFooter() {
         return footerView;
-    }
-
-    public void setHeader(View headerView) {
-        this.headerView = headerView;
-    }
-
-    public void setFooter(View footerView) {
-        this.footerView = footerView;
     }
 }

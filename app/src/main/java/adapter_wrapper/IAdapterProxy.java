@@ -17,4 +17,10 @@ public interface IAdapterProxy {
     int getItemCount();
 
     int getItemViewType(int position);
+
+    void onViewRecycled(RecyclerView.ViewHolder holder);
+
+    void onViewAttachedToWindow(RecyclerView.ViewHolder holder);
+
+    void onViewDetachedFromWindow(RecyclerView.ViewHolder holder);
 }

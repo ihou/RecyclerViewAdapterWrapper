@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -35,7 +36,10 @@ public class MainActivity extends Activity {
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && mAdapter.isFooterShown()) {
+                if (!ViewCompat.canScrollVertically(recyclerView, -1)) {
+                    //top
+                } else if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
+                    //bottom
                     Toast.makeText(getApplicationContext(), "load", Toast.LENGTH_SHORT).show();
                     final int index = modelList.get(modelList.size() - 1).getIndex();
                     recyclerView.postDelayed(new Runnable() {

@@ -87,4 +87,16 @@ public class MyAdapterProxy implements IAdapterProxy {
         return modelList.get(position).getType();
     }
 
+    @Override
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+    }
+
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+    }
+
 }
