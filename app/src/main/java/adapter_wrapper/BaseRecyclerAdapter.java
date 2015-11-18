@@ -53,7 +53,7 @@ public class BaseRecyclerAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (hasHeader && hasFooter) {
-            if (position != 0 && position != getItemCount()) {
+            if (position != 0 && position != getItemCount() - 1) {
                 adapterProxy.onBindViewHolder(holder, position - 1);
             }
         } else if (hasHeader) {
@@ -75,7 +75,7 @@ public class BaseRecyclerAdapter extends RecyclerView.Adapter {
         if (hasHeader && hasFooter) {
             if (position == 0) {
                 return TYPE_HEADER;
-            } else if (position == adapterProxy.getItemCount() + 1) {
+            } else if (position == getItemCount() - 1) {
                 return TYPE_FOOTER;
             } else {
                 return adapterProxy.getItemViewType(position - 1);
@@ -135,7 +135,6 @@ public class BaseRecyclerAdapter extends RecyclerView.Adapter {
     public long getItemId(int position) {
         return super.getItemId(position);
     }
-
 
 
     public boolean hasHeader() {

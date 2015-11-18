@@ -58,15 +58,15 @@ public class MainActivity extends Activity {
         });
 
 
-        for (int i = 0; i < 100; i++) {
-            modelList.add(new Model(0, i + 1));
-        }
+//        for (int i = 0; i < 100; i++) {
+//            modelList.add(new Model(0, i + 1));
+//        }
 
         final View header = View.inflate(this, R.layout.row_header, null);
         View footer = View.inflate(this, R.layout.row_footer, null);
         mAdapter = new MyRecyclerViewAdapter(modelList, header, footer);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
+//        mAdapter.notifyDataSetChanged();
 
         mRecyclerView.postDelayed(new Runnable() {
             @Override
@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modelList.add(0, new Model(0, modelList.get(0).getIndex() - 1));
+                modelList.add(0, new Model(0, modelList.size() == 0 ? 0 : modelList.get(0).getIndex() - 1));
                 mAdapter.notifyItemInserted(mAdapter.hasHeader() ? 1 : 0);
                 mRecyclerView.scrollToPosition(0);
             }
